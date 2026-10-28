@@ -3,7 +3,7 @@ import { getCurrentUser } from '@/lib/auth';
 import Link from 'next/link';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
+export const dynamic = 'force-dynamic';
 async function createProblem(formData: FormData) {
   'use server';
   const currentUser = await getCurrentUser();

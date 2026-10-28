@@ -3,7 +3,7 @@ import { getCurrentUser, clearSessionCookie } from '@/lib/auth';
 import { UserBadge } from '@/components/UserBadge';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic';
 async function handleHeaderLogout() {
   'use server';
   await clearSessionCookie();

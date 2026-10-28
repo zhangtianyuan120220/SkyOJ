@@ -3,7 +3,7 @@ import { getCurrentUser, clearSessionCookie } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic';
 async function handleHeaderLogout() {
   'use server';
   await clearSessionCookie();

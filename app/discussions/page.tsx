@@ -4,7 +4,7 @@ import { UserBadge } from '@/components/UserBadge';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic';
 // Server Action: 退出登录
 async function handleHeaderLogout() {
   'use server';
@@ -178,7 +178,7 @@ export default async function DiscussionsPage() {
                     <p className="text-xs text-gray-600 leading-relaxed pl-1">{item.content}</p>
 
                     <div className="flex items-center gap-2 pt-1">
-                      <UserBadge username={item.user.username} role={item.user.role} oiBadge={item.user.oiBadge} />
+                      <UserBadge username={item.user.username} role={item.user.role} oiBadge={item.user.oiBadge ?? undefined} />
                     </div>
                   </div>
                 ))}

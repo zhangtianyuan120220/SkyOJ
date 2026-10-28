@@ -4,7 +4,7 @@ import { UserBadge } from '@/components/UserBadge';
 import { revalidatePath } from 'next/cache';
 import { Suspense } from 'react';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic';
 async function handleHeaderLogout() {
   'use server';
   await clearSessionCookie();
@@ -84,7 +84,7 @@ async function BenbenList() {
                   {item.user.username.slice(0, 1).toUpperCase()}
                 </div>
                 <Link href={`/users/${item.user.id}`} className="hover:underline">
-                  <UserBadge username={item.user.username} role={item.user.role} oiBadge={item.user.oiBadge} />
+                  <UserBadge username={item.user.username} role={item.user.role} oiBadge={item.user.oiBadge ?? undefined} />
                 </Link>
                 <span className="text-[10px] text-gray-400">{new Date(item.createdAt).toLocaleString()}</span>
               </div>

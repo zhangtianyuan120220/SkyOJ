@@ -3,7 +3,7 @@ import { setSessionCookie, clearSessionCookie, getCurrentUser, hashPassword, ver
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic';
 async function handleRegister(formData: FormData) {
   'use server';
   const username = (formData.get('username') as string || '').trim();

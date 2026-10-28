@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
-
+export const dynamic = 'force-dynamic';
 async function handleHeaderLogout() {
   'use server';
   await clearSessionCookie();

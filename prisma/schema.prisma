@@ -8,18 +8,19 @@ generator client {
 }
 
 model User {
-  id            String                @id @default(cuid())
-  username      String                @unique
-  email         String                @unique
-  password      String
-  role          String                @default("USER")
-  guzhi         Int                   @default(120)
-  slogan        String                @default("这家伙很懒，什么也没有留下...")
-  createdAt     DateTime              @default(now())
-  benbens       Benben[]
-  submissions   Submission[]
-  discussions   Discussion[]
-  comments      Comment[]
+  id           String               @id @default(cuid())
+  username     String               @unique
+  email        String               @unique
+  password     String
+  role         String               @default("USER")
+  guzhi        Int                  @default(120)
+  slogan       String               @default("这家伙很懒，什么也没有留下...")
+  createdAt    DateTime             @default(now())
+  benbens      Benben[]
+  submissions  Submission[]
+  discussions  Discussion[]
+  comments     Comment[]
+  oiBadge      String?
   registrations ContestRegistration[]
 }
 
