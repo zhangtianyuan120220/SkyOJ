@@ -669,13 +669,7 @@ function applyModuleFactoryName(factory) {
 async function externalImport(id) {
     let raw;
     try {
-        switch (id) {
-  case "next/dist/compiled/@vercel/og/index.node.js":
-    raw = await import("next/dist/compiled/@vercel/og/index.edge.js");
-    break;
-  default:
-    raw = await import(id);
-};
+        raw = await import(id);
     } catch (err) {
         // TODO(alexkirsz) This can happen when a client-side module tries to load
         // an external module we don't provide a shim for (e.g. querystring, url).
@@ -801,7 +795,7 @@ function loadRuntimeChunkPath(sourcePath, chunkPath) {
     }
     try {
         const resolved = path.resolve(RUNTIME_ROOT, chunkPath);
-        const chunkModules = requireChunk(chunkPath);
+        const chunkModules = require(resolved);
         installCompressedModuleFactories(chunkModules, 0, moduleFactories);
         loadedChunks.add(chunkPath);
     } catch (cause) {
@@ -830,7 +824,7 @@ function loadChunkAsync(chunkData) {
             const resolved = path.resolve(RUNTIME_ROOT, chunkPath);
             // TODO: consider switching to `import()` to enable concurrent chunk loading and async file io
             // However this is incompatible with hot reloading (since `import` doesn't use the require cache)
-            const chunkModules = requireChunk(chunkPath);
+            const chunkModules = require(resolved);
             installCompressedModuleFactories(chunkModules, 0, moduleFactories);
             entry = loadedChunk;
         } catch (cause) {
@@ -941,116 +935,3 @@ module.exports = (sourcePath)=>({
 
 
 //# sourceMappingURL=%5Bturbopack%5D_runtime.js.map
-
-  function requireChunk(chunkPath) {
-    switch(chunkPath) {
-      case "server/chunks/ssr/[root-of-the-server]__03i9ryu59tuyh._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__03i9ryu59tuyh._.js");
-      case "server/chunks/ssr/[root-of-the-server]__111xt3k6hwhk0._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__111xt3k6hwhk0._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1ireqd10pl8it._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1ireqd10pl8it._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1wl0vw-n8lbkn._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1wl0vw-n8lbkn._.js");
-      case "server/chunks/ssr/[turbopack]_runtime.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js");
-      case "server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yrisjoev.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yrisjoev.js");
-      case "server/chunks/ssr/node_modules_01xbj_9zg44kw._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_01xbj_9zg44kw._.js");
-      case "server/chunks/ssr/node_modules_next_dist_0janj0i6dqko7._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0janj0i6dqko7._.js");
-      case "server/chunks/ssr/node_modules_next_dist_1yspyvymeb-pc._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1yspyvymeb-pc._.js");
-      case "server/chunks/ssr/node_modules_next_dist_client_components_0wpq8j32_ibz4._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0wpq8j32_ibz4._.js");
-      case "server/chunks/ssr/node_modules_next_dist_client_components_builtin_forbidden_0symwr9mbf-fh.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_forbidden_0symwr9mbf-fh.js");
-      case "server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0xky89qu.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0xky89qu.js");
-      case "server/chunks/ssr/node_modules_next_dist_compiled_1iylvrn65zzfj._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_compiled_1iylvrn65zzfj._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0048lj3x5xrfs.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0048lj3x5xrfs.js");
-      case "server/chunks/ssr/[root-of-the-server]__0-lc5h7qp311g._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0-lc5h7qp311g._.js");
-      case "server/chunks/ssr/[root-of-the-server]__095o5gboy7ueh._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__095o5gboy7ueh._.js");
-      case "server/chunks/ssr/[root-of-the-server]__188puk4mj6fda._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__188puk4mj6fda._.js");
-      case "server/chunks/ssr/app_admin_page_tsx_00w5p10kmrpij._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_admin_page_tsx_00w5p10kmrpij._.js");
-      case "server/chunks/ssr/node_modules_1jbtcgyhj049i._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1jbtcgyhj049i._.js");
-      case "server/chunks/ssr/node_modules_next_dist_0ocrceo0c9psx._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0ocrceo0c9psx._.js");
-      case "server/chunks/ssr/node_modules_next_dist_1c5t_vsn6u8fr._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5t_vsn6u8fr._.js");
-      case "server/chunks/ssr/node_modules_next_dist_1et9oq9q9-y3v._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1et9oq9q9-y3v._.js");
-      case "server/chunks/ssr/node_modules_next_dist_compiled_0uto1nzxlgfoh._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_compiled_0uto1nzxlgfoh._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0dp1we7mtp00u.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0dp1we7mtp00u.js");
-      case "server/chunks/ssr/[root-of-the-server]__0crn5srtzw629._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0crn5srtzw629._.js");
-      case "server/chunks/ssr/[root-of-the-server]__0zqombg5b2p_s._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0zqombg5b2p_s._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1p3hby0sks7oq._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1p3hby0sks7oq._.js");
-      case "server/chunks/ssr/app_articles_page_tsx_02eiu4c8yht0q._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_articles_page_tsx_02eiu4c8yht0q._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1bk1njbsq90kt.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1bk1njbsq90kt.js");
-      case "server/chunks/ssr/[root-of-the-server]__0l9-jaf8jhja-._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0l9-jaf8jhja-._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1htgwgpl70_72._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1htgwgpl70_72._.js");
-      case "server/chunks/ssr/[root-of-the-server]__20o39rh01yne9._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__20o39rh01yne9._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1333x7ppjinhy.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1333x7ppjinhy.js");
-      case "server/chunks/ssr/[root-of-the-server]__0a1r6_xk7_o7j._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0a1r6_xk7_o7j._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1kkoa7o7z390f._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1kkoa7o7z390f._.js");
-      case "server/chunks/ssr/app_auth_page_tsx_07wutg4y2kyg9._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_auth_page_tsx_07wutg4y2kyg9._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1xgz05zs2ds3b.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1xgz05zs2ds3b.js");
-      case "server/chunks/ssr/[root-of-the-server]__1a57qc8jby5u7._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1a57qc8jby5u7._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1rbe3ys60apn5._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1rbe3ys60apn5._.js");
-      case "server/chunks/ssr/app_contests_page_tsx_1odisipwds8nz._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_contests_page_tsx_1odisipwds8nz._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0whv1u9jf0jsv.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0whv1u9jf0jsv.js");
-      case "server/chunks/ssr/[root-of-the-server]__10qv6w4_sln_1._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__10qv6w4_sln_1._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1m8b8gpp3f11o._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1m8b8gpp3f11o._.js");
-      case "server/chunks/ssr/app_contests_[id]_page_tsx_0akqyfcs84uuz._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_contests_[id]_page_tsx_0akqyfcs84uuz._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1y31lg--ezb-u.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1y31lg--ezb-u.js");
-      case "server/chunks/ssr/[root-of-the-server]__10rbm56xxdxmt._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__10rbm56xxdxmt._.js");
-      case "server/chunks/ssr/[root-of-the-server]__12kjx5u7s2d5k._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__12kjx5u7s2d5k._.js");
-      case "server/chunks/ssr/app_discussions_page_tsx_061w4vmwvkhvv._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_discussions_page_tsx_061w4vmwvkhvv._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1kmttzps84b8e.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1kmttzps84b8e.js");
-      case "server/chunks/[externals]__18tvp6vbbgd06._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/[externals]__18tvp6vbbgd06._.js");
-      case "server/chunks/[root-of-the-server]__16givbh587ghw._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__16givbh587ghw._.js");
-      case "server/chunks/[turbopack]_runtime.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js");
-      case "server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjlssn1kss.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjlssn1kss.js");
-      case "server/chunks/ssr/[root-of-the-server]__1vfjcp1ucanm2._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1vfjcp1ucanm2._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1wzd3nbi8yw3t._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1wzd3nbi8yw3t._.js");
-      case "server/chunks/ssr/app_page_tsx_0ru5hei1tp4z2._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_page_tsx_0ru5hei1tp4z2._.js");
-      case "server/chunks/ssr/node_modules_next_dist_api_navigation_react-server_09-6jf39kv4rm.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_api_navigation_react-server_09-6jf39kv4rm.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_04tpgk4fjuqws.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_04tpgk4fjuqws.js");
-      case "server/chunks/ssr/[root-of-the-server]__1rgwga4o71-x4._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1rgwga4o71-x4._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1xrnjkm7bx4ke._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1xrnjkm7bx4ke._.js");
-      case "server/chunks/ssr/app_problems_page_tsx_1y-dn4x0_h5i4._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_problems_page_tsx_1y-dn4x0_h5i4._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_04vr6bzmw6o9a.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_04vr6bzmw6o9a.js");
-      case "server/chunks/ssr/[root-of-the-server]__1swfbsuk0u3yw._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1swfbsuk0u3yw._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1yuj5xl5mjo8v._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1yuj5xl5mjo8v._.js");
-      case "server/chunks/ssr/app_problems_[id]_page_tsx_1z1xw7xe9jaeo._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_problems_[id]_page_tsx_1z1xw7xe9jaeo._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_20z96coyh5_jw.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_20z96coyh5_jw.js");
-      case "server/chunks/ssr/[root-of-the-server]__0803ema4rym_y._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0803ema4rym_y._.js");
-      case "server/chunks/ssr/[root-of-the-server]__0lp54faj2180n._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0lp54faj2180n._.js");
-      case "server/chunks/ssr/app_ranklist_page_tsx_1lzbhuhfhr-wq._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_ranklist_page_tsx_1lzbhuhfhr-wq._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0o71kxb5tq19_.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0o71kxb5tq19_.js");
-      case "server/chunks/ssr/[root-of-the-server]__0oxyd4vtcy7yo._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0oxyd4vtcy7yo._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1mtrhx1_77sg7._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mtrhx1_77sg7._.js");
-      case "server/chunks/ssr/app_settings_page_tsx_0p9in4o08vvkj._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_settings_page_tsx_0p9in4o08vvkj._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_14nruh74kvw55.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_14nruh74kvw55.js");
-      case "server/chunks/ssr/[root-of-the-server]__0hlc-xu4oxiqe._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hlc-xu4oxiqe._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1-16_l-d2690s._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1-16_l-d2690s._.js");
-      case "server/chunks/ssr/app_submissions_page_tsx_16j86moo_bpgz._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_submissions_page_tsx_16j86moo_bpgz._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1h1sjw4axz3xx.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1h1sjw4axz3xx.js");
-      case "server/chunks/ssr/[root-of-the-server]__0ti8_3oafbb6e._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0ti8_3oafbb6e._.js");
-      case "server/chunks/ssr/[root-of-the-server]__17zi11ve63tqf._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__17zi11ve63tqf._.js");
-      case "server/chunks/ssr/app_submissions_[id]_page_tsx_1q9sbs2xjcv-m._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_submissions_[id]_page_tsx_1q9sbs2xjcv-m._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0g7_90arz57d5.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_0g7_90arz57d5.js");
-      case "server/chunks/ssr/[root-of-the-server]__1i2sj88l05m2z._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1i2sj88l05m2z._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1zdm5d465dlf0._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1zdm5d465dlf0._.js");
-      case "server/chunks/ssr/app_tickets_page_tsx_1m9gv-9o14z52._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_tickets_page_tsx_1m9gv-9o14z52._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1ug_ydiqe25_f.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_1ug_ydiqe25_f.js");
-      case "server/chunks/ssr/[root-of-the-server]__0wn_i1k2pckl8._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0wn_i1k2pckl8._.js");
-      case "server/chunks/ssr/[root-of-the-server]__0y1cdb1pk211s._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0y1cdb1pk211s._.js");
-      case "server/chunks/ssr/app_users_[id]_page_tsx_1ncpnlw-v-hvw._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/app_users_[id]_page_tsx_1ncpnlw-v-hvw._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_11-4j4nswugdc.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_11-4j4nswugdc.js");
-      case "server/chunks/ssr/[root-of-the-server]__0py1t7q9ntzgc._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0py1t7q9ntzgc._.js");
-      case "server/chunks/ssr/[root-of-the-server]__1_lgco5-uwxyd._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1_lgco5-uwxyd._.js");
-      case "server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-psc_d2.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-psc_d2.js");
-      case "server/chunks/ssr/node_modules_0gxlxpuufujz9._.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_0gxlxpuufujz9._.js");
-      case "server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_13q04th-918ib.js": return require("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_esm_build_templates_app-page_13q04th-918ib.js");
-      default:
-        throw new Error(`Not found ${chunkPath}`);
-    }
-  }
-
-
-  async function loadWasmChunk(chunkPath) {
-    switch (chunkPath) {
-      case "C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.mysql.wasm": return (await import("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.mysql.wasm")).default;
-      case "C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.postgresql.wasm": return (await import("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.postgresql.wasm")).default;
-      case "C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.sqlite.wasm": return (await import("C:/Users/0/Desktop/my-oj/.open-next/server-functions/default/node_modules/@prisma/client/runtime/query_engine_bg.sqlite.wasm")).default;
-      default:
-        throw new Error(`Unknown wasm chunk: ${chunkPath}`);
-    }
-  }
