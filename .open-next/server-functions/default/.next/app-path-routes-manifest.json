@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/page": "/admin",
+  "/articles/[id]/page": "/articles/[id]",
+  "/articles/page": "/articles",
+  "/auth/page": "/auth",
+  "/contests/[id]/page": "/contests/[id]",
+  "/contests/page": "/contests",
+  "/discussions/page": "/discussions",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/problems/[id]/page": "/problems/[id]",
+  "/problems/page": "/problems",
+  "/ranklist/page": "/ranklist",
+  "/settings/page": "/settings",
+  "/submissions/[id]/page": "/submissions/[id]",
+  "/submissions/page": "/submissions",
+  "/tickets/page": "/tickets",
+  "/users/[id]/page": "/users/[id]"
+}
