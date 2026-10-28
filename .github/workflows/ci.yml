@@ -1,0 +1,35 @@
+name: SkyOJ CI Build Check
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码 (Checkout Repository)
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 安装项目依赖 (Install Dependencies)
+        run: npm install
+
+      - name: 生成 Prisma 客户端 (Prisma Generate)
+        run: npx prisma generate
+        env:
+          # 仅用于编译时占位，防止编译报错
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+
+      - name: 打包构建 Next.js 应用 (Build App)
+        run: npm run build
+        env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"

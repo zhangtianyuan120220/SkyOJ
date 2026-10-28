@@ -1,0 +1,128 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String                @id @default(cuid())
+  username      String                @unique
+  email         String                @unique
+  password      String
+  role          String                @default("USER")
+  guzhi         Int                   @default(120)
+  slogan        String                @default("这家伙很懒，什么也没有留下...")
+  createdAt     DateTime              @default(now())
+  benbens       Benben[]
+  submissions   Submission[]
+  discussions   Discussion[]
+  comments      Comment[]
+  registrations ContestRegistration[]
+}
+
+model Problem {
+  id              String           @id
+  title           String
+  difficulty      String
+  content         String
+  type            String           @default("NORMAL")
+  score           Int              @default(100)
+  testCases       String           @default("")
+  createdAt       DateTime         @default(now())
+  submissions     Submission[]
+  contestProblems ContestProblem[]
+  discussions     Discussion[]
+}
+
+model Benben {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Submission {
+  id           String             @id @default(cuid())
+  problemId    String
+  userId       String
+  language     String             @default("C++14")
+  code         String
+  status       String
+  time         Int                @default(0)
+  memory       Int                @default(0)
+  createdAt    DateTime           @default(now())
+  problem      Problem            @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  testResults  TestCaseResult[]
+}
+
+// 评测详情：每个测试点的运行状态与输出对比 (Diff View)
+model TestCaseResult {
+  id           String     @id @default(cuid())
+  submissionId String
+  testCaseNo   Int        // 测试点编号
+  status       String     // Accepted / Wrong Answer / Time Limit Exceeded
+  time         Int        // 耗时 (ms)
+  memory       Int        // 内存 (KB)
+  userOutput   String     @default("")
+  expected     String     @default("")
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
+
+model Contest {
+  id            String                @id @default(cuid())
+  title         String
+  description   String
+  startTime     DateTime
+  endTime       DateTime
+  status        String                @default("Upcoming")
+  createdAt     DateTime              @default(now())
+  problems      ContestProblem[]
+  registrations ContestRegistration[]
+}
+
+model ContestProblem {
+  id        String   @id @default(cuid())
+  contestId String
+  problemId String
+  contest   Contest  @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  problem   Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+}
+
+model ContestRegistration {
+  id        String   @id @default(cuid())
+  contestId String
+  userId    String
+  createdAt DateTime @default(now())
+  contest   Contest  @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([contestId, userId])
+}
+
+model Discussion {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  problemId String?
+  userId    String
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem   Problem?  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  comments  Comment[]
+}
+
+// 文章/题解评论表 (讨论区与题解评论互动)
+model Comment {
+  id           String     @id @default(cuid())
+  content      String
+  discussionId String
+  userId       String
+  createdAt    DateTime   @default(now())
+  discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
